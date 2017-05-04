@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+      <extension
+         point="org.eclipse.ui.actionSets">
+      		<actionSet
+            id="lt.laimis.test"
+            label="testas"
+            visible="false">
+			<action
+               class="lt.laimis.test.SempleAction"
+               icon="icons/navigation.gif"
+               id="lt.laimis.test.SempleAction"
+               label="LB"
+               toolbarPath="LaimisTest">
+			</action>
+		</actionSet>
+   </extension>
+</plugin>
