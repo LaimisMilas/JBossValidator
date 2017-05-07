@@ -1,4 +1,4 @@
-package lt.laimis.test;
+package lt.laimis.test.store;
 
 import java.util.Date;
 

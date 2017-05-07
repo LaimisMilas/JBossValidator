@@ -1,4 +1,4 @@
-package lt.laimis.test;
+package lt.laimis.test.store;
 
 import java.io.File;
 import java.io.StringWriter;
@@ -8,13 +8,15 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
+import lt.laimis.test.FileReadWrite;
+
 public class DataLouder {
 
 	// String xmlStore =
 	// "D:/Projects/Payments.IQ/workspace.client/JBossValidator/"
 	// + "src/lt/laimis/test/store.xml";
 
-	String xmlStore = "C:/Users/laimonas.milasius/workspace/jbossvalidator.zip_expanded/JBossValidator/src/lt/laimis/test/store.xml";
+	String xmlStore = "C:/git/JBossValidator/src/lt/laimis/test/store.xml";
 
 	public StorageRoot initData() {
 
@@ -30,7 +32,6 @@ public class DataLouder {
 			
 			e.printStackTrace();
 			
-			storageRoot.setError(e.getMessage());
 		}
 
 		return storageRoot;

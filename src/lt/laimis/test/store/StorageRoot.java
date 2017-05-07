@@ -1,4 +1,4 @@
-package lt.laimis.test;
+package lt.laimis.test.store;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -6,12 +6,12 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+import lt.laimis.test.CompareClient;
+
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {"compareClient","deviceIPAddressArray","iQClientConfig"})
 @XmlRootElement(name = "StorageRoot")
 public class StorageRoot {
-	
-	private String error;
 
 	@XmlElement(name = "CompareClient")
 	protected CompareClient compareClient;
@@ -21,14 +21,6 @@ public class StorageRoot {
 
 	@XmlElement(name = "ChangeIQClientIPConfig")
 	protected ChangeIQClientIPConfig iQClientConfig;
-	
-	public String getError() {
-		return error;
-	}
-
-	public void setError(String error) {
-		this.error = error;
-	}
 	
 	public ChangeIQClientIPConfig getiQClientConfig() {
 		return iQClientConfig;

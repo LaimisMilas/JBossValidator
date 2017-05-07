@@ -21,6 +21,11 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.ui.progress.UIJob;
+
+import lt.laimis.test.store.DataLouder;
+import lt.laimis.test.store.DeviceIPAddress;
+import lt.laimis.test.store.StorageRoot;
+
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 

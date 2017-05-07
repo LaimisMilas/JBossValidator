@@ -12,7 +12,7 @@
                icon="icons/navigation.gif"
                id="lt.laimis.test.SempleAction"
                label="LB"
-               toolbarPath="LaimisTest">
+               toolbarPath="LMTest">
 			</action>
 		</actionSet>
    </extension>
