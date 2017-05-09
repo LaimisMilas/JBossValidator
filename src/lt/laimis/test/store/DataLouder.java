@@ -16,7 +16,7 @@ public class DataLouder {
 	// "D:/Projects/Payments.IQ/workspace.client/JBossValidator/"
 	// + "src/lt/laimis/test/store.xml";
 
-	String xmlStore = "C:/git/JBossValidator/src/lt/laimis/test/store.xml";
+	String xmlStore = "C:/git/JBossValidator/src/lt/laimis/test/store/store.xml";
 
 	public StorageRoot initData() {
 
