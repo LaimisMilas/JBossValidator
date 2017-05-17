@@ -5,6 +5,8 @@ import java.util.List;
 import org.eclipse.jface.dialogs.IMessageProvider;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.jface.viewers.ComboViewer;
+import org.eclipse.jface.viewers.IOpenListener;
+import org.eclipse.jface.viewers.OpenEvent;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -32,7 +34,7 @@ import org.eclipse.swt.widgets.Text;
 public class SectionsDialog extends TitleAreaDialog {
 
 	protected UIJob job_load;
-	
+
 	private Text selectedDir;
 	private TreeViewer dirTreeView;
 	private String selectedDirString = "";
@@ -44,8 +46,9 @@ public class SectionsDialog extends TitleAreaDialog {
 
 	public SectionsDialog(Shell parentShell) {
 		super(parentShell);
-		storageRoot = new DataLouder().initData();
-		selectedDirString = storageRoot.getiQClientConfig().getSelectedDirAsString().trim();
+		storageRoot = new DataLouder().initData(parentShell);
+		selectedDirString = storageRoot.getiQClientConfig()
+				.getSelectedDirAsString().trim();
 	}
 
 	@Override
@@ -80,8 +83,9 @@ public class SectionsDialog extends TitleAreaDialog {
 				ipComboLookup.add(item);
 			}
 			ipAddressViewer.setInput(ipComboLookup);
-			ipAddressCombo.setText(storageRoot.getiQClientConfig().getSelectedIPAddress());
-			//ipAddressCombo.select(0);
+			ipAddressCombo.setText(storageRoot.getiQClientConfig()
+					.getSelectedIPAddress());
+			// ipAddressCombo.select(0);
 		}
 		{
 
@@ -101,8 +105,8 @@ public class SectionsDialog extends TitleAreaDialog {
 						selectedDirString = result;
 						selectedDir.setText(selectedDirString);
 						updateDirTree();
-						
-					}				
+
+					}
 				}
 			});
 
@@ -118,11 +122,20 @@ public class SectionsDialog extends TitleAreaDialog {
 			GridData gridData = new GridData(GridData.FILL_BOTH);
 			gridData.widthHint = 200;
 			gridData.heightHint = 300;
-			dirTreeView.getTree().setLayoutData(
-					gridData);
-			dirTreeView.setContentProvider(new FileTreeContentProvider(selectedDirString));
+			dirTreeView.getTree().setLayoutData(gridData);
+			dirTreeView.setContentProvider(new FileTreeContentProvider(
+					selectedDirString));
 			dirTreeView.setLabelProvider(new FileTreeLabelProvider());
 			dirTreeView.setInput(selectedDirString);
+			dirTreeView.addOpenListener(new IOpenListener() {
+				@Override
+				public void open(OpenEvent ev) {
+					String filePath = ev.getSelection().toString().trim().replace("[", "");
+					filePath = filePath.replace("]", "");
+					
+					WinSystemCommandRunner.runSystemCommand("notepad.exe " + filePath);
+				}
+			});
 		}
 		{
 			// Create the tree viewer to display the file tree
@@ -130,9 +143,9 @@ public class SectionsDialog extends TitleAreaDialog {
 			GridData gridData = new GridData(GridData.FILL_BOTH);
 			gridData.widthHint = 200;
 			gridData.heightHint = 300;
-			dirTree2View.getTree().setLayoutData(
-					gridData);
-			dirTree2View.setContentProvider(new FileTreeContentProvider(selectedDirString));
+			dirTree2View.getTree().setLayoutData(gridData);
+			dirTree2View.setContentProvider(new FileTreeContentProvider(
+					selectedDirString));
 			dirTree2View.setLabelProvider(new FileTreeLabelProvider());
 			dirTree2View.setInput(selectedDirString);
 		}
@@ -142,8 +155,7 @@ public class SectionsDialog extends TitleAreaDialog {
 				@Override
 				public void widgetSelected(SelectionEvent e) {
 
-					updateClientConnectionIpAddress(ipAddressCombo
-							.getText());
+					updateClientConnectionIpAddress(ipAddressCombo.getText());
 
 					setInformationMessage("IP adresas pakeistas, sekmingai");
 				}
@@ -155,7 +167,7 @@ public class SectionsDialog extends TitleAreaDialog {
 			button.addSelectionListener(new SelectionAdapter() {
 				@Override
 				public void widgetSelected(SelectionEvent e) {
-					
+
 					validateClientStructure();
 
 					setInformationMessage("Validation Done");
@@ -182,7 +194,7 @@ public class SectionsDialog extends TitleAreaDialog {
 	protected void validateClientStructure() {
 		TreeItem[] treeItems = dirTreeView.getTree().getItems();
 		treeItems.toString();
-		
+
 	}
 
 	protected void updateDirTree() {
@@ -195,7 +207,7 @@ public class SectionsDialog extends TitleAreaDialog {
 		// save storageRoot data.
 		String result = new DataLouder().saveData(storageRoot);
 		setInformationMessage(result);
-		
+
 	}
 
 	public void updateClientConnectionIpAddress(String newIP) {
@@ -204,7 +216,8 @@ public class SectionsDialog extends TitleAreaDialog {
 		// update ip address
 		// store in location
 
-		String fileTmp = Constance.iQCLient + storageRoot.getiQClientConfig().getTmpIQClientConfigFile();
+		String fileTmp = Constance.iQCLient
+				+ storageRoot.getiQClientConfig().getTmpIQClientConfigFile();
 
 		List<String> lines = FileReadWrite.readFileAsLines(fileTmp);
 
@@ -214,7 +227,8 @@ public class SectionsDialog extends TitleAreaDialog {
 
 			if (line.contains(storageRoot.getiQClientConfig().getArg().trim())) {
 
-				line = line.replace(storageRoot.getiQClientConfig().getArg(), newIP);
+				line = line.replace(storageRoot.getiQClientConfig().getArg(),
+						newIP);
 			}
 
 			line = line + " \n";
@@ -222,7 +236,9 @@ public class SectionsDialog extends TitleAreaDialog {
 			sb.append(line);
 		}
 
-		String writeTo = selectedDirString.trim() + storageRoot.getiQClientConfig().getSaveIQClientConfigFile().trim();
+		String writeTo = selectedDirString.trim()
+				+ storageRoot.getiQClientConfig().getSaveIQClientConfigFile()
+						.trim();
 
 		FileReadWrite.writeFile(writeTo, sb.toString());
 	}

@@ -3,6 +3,7 @@ package lt.laimis.test;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.IWorkbenchWindowActionDelegate;
 
@@ -12,7 +13,8 @@ public class SempleAction extends Action implements IWorkbenchWindowActionDelega
 	
 	@Override
 	public void run(IAction arg0) {
-		SectionsDialog dialog = new SectionsDialog(window.getShell());
+		SectionsDialog dialog = new SectionsDialog(Display.getDefault()
+				.getActiveShell());
 		dialog.open();
 	}
 
