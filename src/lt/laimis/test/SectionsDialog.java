@@ -186,7 +186,10 @@ public class SectionsDialog extends TitleAreaDialog {
 		 * @Override public IStatus runInUIThread(IProgressMonitor monitor) {
 		 * init(); return Status.OK_STATUS; } }; job_load.schedule();
 		 */
-
+		
+		//TODO Galimybe klientui prideti debug konfiguracija.
+		//-Xdebug
+		//-Xrunjdwp:transport=dt_socket,server=n,suspend=n,address=8787
 		return area;
 
 	}
