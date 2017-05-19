@@ -137,12 +137,12 @@ public class SectionsDialog extends TitleAreaDialog {
 					
 					//reikia patikrinti ar cia folderis ar failas
 					if(file.isDirectory()){
-						//kaip folder paleidziame komanda explorer.exe
+						//kaip folder, paleidziame komanda explorer.exe
 						WinSystemCommandRunner.openDirectory(filePath);
 						
 					}else{
 						if(file.isFile()){
-							//kai failas paleidziame notpad.exe
+							//kai failas, paleidziame notpad.exe
 							WinSystemCommandRunner.openFile(filePath);
 						}
 					}
