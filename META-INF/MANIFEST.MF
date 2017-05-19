@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: JBossValidator
 Bundle-SymbolicName: JBossValidator; singleton:=true
-Bundle-Version: 1.0.5.qualifier
+Bundle-Version: 1.0.6.qualifier
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.osgi.services;bundle-version="3.3.0",

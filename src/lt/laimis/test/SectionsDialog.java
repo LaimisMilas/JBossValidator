@@ -1,5 +1,6 @@
 package lt.laimis.test;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.jface.dialogs.IMessageProvider;
@@ -34,7 +35,6 @@ import org.eclipse.swt.widgets.Text;
 public class SectionsDialog extends TitleAreaDialog {
 
 	protected UIJob job_load;
-
 	private Text selectedDir;
 	private TreeViewer dirTreeView;
 	private String selectedDirString = "";
@@ -133,7 +133,24 @@ public class SectionsDialog extends TitleAreaDialog {
 					String filePath = ev.getSelection().toString().trim().replace("[", "");
 					filePath = filePath.replace("]", "");
 					
-					WinSystemCommandRunner.runSystemCommand("notepad.exe " + filePath);
+					File file = new File(filePath);
+					
+					//reikia patikrinti ar cia folderis ar failas
+					if(file.isDirectory()){
+						
+						//kaip folder paleidziam komanda "start"
+						WinSystemCommandRunner.openDirectory(filePath);
+						
+					}else{
+						
+						if(file.isFile()){
+							
+							//kai failas paleidziame notpad
+							WinSystemCommandRunner.openFile(filePath);
+						}
+					}
+					
+					
 				}
 			});
 		}

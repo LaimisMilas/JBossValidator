@@ -2,12 +2,20 @@ package lt.laimis.test;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
 
 public class WinSystemCommandRunner {
 
 	public static boolean printOut = false;
+	
+	public static void openDirectory(String path){
+		
+		runSystemCommand("explorer.exe " +  path);
+	}
+	
+	public static void openFile(String path){
+		
+		runSystemCommand("notepad.exe " +  path);
+	}
 
 	// return String
 	public static String runSystemCommand(String command) {
@@ -42,8 +50,13 @@ public class WinSystemCommandRunner {
 
 	public static void main(String[] args) {
 		
+		//atidaro faila redagavimo rezimu
 		runSystemCommand("notepad.exe C:/Users/laimonas.milasius/Downloads/iQClient/configuration/ATMiQClient.cfg");
-
+		
+		//atidaro folder
+		//runSystemCommand("start .");
+		
+		//Paleidzia exe faila
 		//runSystemCommand("C:/Users/laimonas.milasius/Downloads/iQClient/iQClient.exe");
 		
 	}
