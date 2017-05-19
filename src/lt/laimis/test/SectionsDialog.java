@@ -130,27 +130,22 @@ public class SectionsDialog extends TitleAreaDialog {
 			dirTreeView.addOpenListener(new IOpenListener() {
 				@Override
 				public void open(OpenEvent ev) {
+					
 					String filePath = ev.getSelection().toString().trim().replace("[", "");
 					filePath = filePath.replace("]", "");
-					
-					File file = new File(filePath);
+					File file = new File(filePath);	
 					
 					//reikia patikrinti ar cia folderis ar failas
 					if(file.isDirectory()){
-						
 						//kaip folder paleidziam komanda "start"
 						WinSystemCommandRunner.openDirectory(filePath);
 						
 					}else{
-						
 						if(file.isFile()){
-							
 							//kai failas paleidziame notpad
 							WinSystemCommandRunner.openFile(filePath);
 						}
 					}
-					
-					
 				}
 			});
 		}
